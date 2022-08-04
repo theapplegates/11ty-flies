@@ -8,8 +8,39 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const { EleventyEdgePlugin } = require("@11ty/eleventy");
+const Image = require("@11ty/eleventy-img")
 
 module.exports = function(eleventyConfig) {
+  // --- START, eleventy-img
+  function imageShortcode(src, alt, sizes="(min-width: 1024px) 100vw, 50vw") {
+    console.log(`Generating image(s) from:  ${src}`)
+    let options = {
+      widths: [300, 600, 900, 1500, 3000],
+      formats: ["avif", "webp", "jpeg"],
+      urlPath: "/images/",
+      outputDir: "./_site/images/",
+      filenameFormat: function (id, src, width, format, options) {
+        const extension = path.extname(src)
+        const name = path.basename(src, extension)
+        return `${name}-${width}w.${format}`
+      }
+    }
+
+    // generate images
+    Image(src, options)
+
+    let imageAttributes = {
+      alt,
+      sizes,
+      loading: "lazy",
+      decoding: "async",
+    }
+    // get metadata
+    metadata = Image.statsSync(src, options)
+    return Image.generateHTML(metadata, imageAttributes)
+  }
+  eleventyConfig.addShortcode("image", imageShortcode)
+  // --- END, eleventy-img
   eleventyConfig.setQuietMode(true);
 
   // Copy the `img` and `css` folders to the output
