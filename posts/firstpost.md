@@ -15,7 +15,7 @@ Photo by <a href="https://unsplash.com/@refargotohp?utm_source=unsplash&utm_medi
 
 /Volumes/Macintosh HD/Users/thor3/Documents/Websites/11baseblog/images/G800-large.jpeg
 
-{% image "G800", "Photo of a business jet" %}
+{% image "G800", "Photo of a business jet", /Websites/11baseblog/images/G800-large.jpeg %}
 
 
 Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.
